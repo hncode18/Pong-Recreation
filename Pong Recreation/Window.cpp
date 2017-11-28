@@ -15,15 +15,19 @@ Window::Window (const std::string &t, int w, int h) :
 	p1 = new Paddle(50, 1);
 	p2 = new Paddle(740, 2);
 	b = new Ball();
+	divider = new Texture();
+	divider->loadFile("res/pong.png");
 }
 Window::~Window ()
 {
 	delete p1;
 	delete p2;
 	delete b;
+	delete divider;
 	p1 = nullptr;
 	p2 = nullptr;
 	b = nullptr;
+	divider = nullptr;
 
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -89,11 +93,13 @@ void Window::pollEvents ()
 
 void Window::clear()
 {
+	SDL_Rect divClip = { 462, 0, 2, 600 };
 	p1->render();
 	p2->render();
 	b->render();
+	divider->render(399, 0, &divClip);
 
 	SDL_RenderPresent(render);
-	SDL_SetRenderDrawColor(render, 81, 137, 226, 255);
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 	SDL_RenderClear(render);   
 }

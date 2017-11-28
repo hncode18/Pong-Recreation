@@ -28,6 +28,7 @@ class Window
 		Paddle *p1 = nullptr;
 		Paddle *p2 = nullptr;
 		Ball *b = nullptr;
+		Texture *divider = nullptr;
 
         bool init();
 };
