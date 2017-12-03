@@ -17,6 +17,8 @@ Window::Window (const std::string &t, int w, int h) :
 	b = new Ball();
 	divider = new Texture();
 	divider->loadFile("res/pong.png");
+	p1Score = new Score(1);
+	p2Score = new Score(2);
 }
 Window::~Window ()
 {
@@ -24,10 +26,14 @@ Window::~Window ()
 	delete p2;
 	delete b;
 	delete divider;
+	delete p1Score;
+	delete p2Score;
 	p1 = nullptr;
 	p2 = nullptr;
 	b = nullptr;
 	divider = nullptr;
+	p1Score = nullptr;
+	p2Score = nullptr;
 
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -64,6 +70,7 @@ bool Window::init ()
 
     return true;
 }
+
 // check events of windows
 void Window::pollEvents ()
 {
@@ -78,6 +85,14 @@ void Window::pollEvents ()
 				if (event.key.keysym.sym == SDLK_ESCAPE) {
 					closed = true;
 				}
+				if (event.key.keysym.sym == SDLK_RETURN) {
+					if ((b->x < 0 || b->x > 800) && (p1Score->score >= 10 || p2Score->score >= 10)) {
+						
+						p1Score->score = 0;
+						p2Score->score = 0;
+						b->reset();
+					}
+				}
 				break;
             default:
                 break;
@@ -89,6 +104,26 @@ void Window::pollEvents ()
 	p1->move();
 	p2->move();
 	b->move(p1->x, p1->y, p1->width, p1->height, p2->x, p2->y, p2->width, p2->height);
+
+	if (b->x < 0) {
+		if (p2Score->score < 9) {
+			p2Score->score++;
+			b->reset();
+		}
+		else {
+			p2Score->score++;
+		}
+	}
+	else if (b->x > 800) {
+		if (p1Score->score < 9) {
+			p1Score->score++;
+			b->reset();
+		}
+		else {
+			p1Score->score++;
+		}
+	}
+
 }
 
 void Window::clear()
@@ -98,6 +133,8 @@ void Window::clear()
 	p2->render();
 	b->render();
 	divider->render(399, 0, &divClip);
+	p1Score->render();
+	p2Score->render();
 
 	SDL_RenderPresent(render);
 	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);

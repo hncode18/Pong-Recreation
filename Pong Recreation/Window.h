@@ -6,6 +6,7 @@
 #include "Element.h"
 #include "Paddle.h"
 #include "Ball.h"
+#include"Score.h"
 
 class Window
 {
@@ -29,6 +30,8 @@ class Window
 		Paddle *p2 = nullptr;
 		Ball *b = nullptr;
 		Texture *divider = nullptr;
+		Score *p1Score = nullptr;
+		Score *p2Score = nullptr;
 
         bool init();
 };

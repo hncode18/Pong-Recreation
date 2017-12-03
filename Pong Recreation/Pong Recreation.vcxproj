@@ -132,6 +132,7 @@
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Element.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

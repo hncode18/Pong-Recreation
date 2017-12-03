@@ -25,10 +25,8 @@ void Ball::move(float x1, float y1, int w1, int h1, float x2, float y2, int w2, 
 	float distX = velX * ((float)(SDL_GetTicks() - time)) / 1000.0f;
 
 	if (x > 800 || x < 0) {
-		x = 400;
-		y = 300;
-		velX *= -1;
-		velY *= -1;
+		velX = 0;
+		velY = 0;
 	}
 	else {
 		x += distX;
@@ -57,4 +55,12 @@ void Ball::move(float x1, float y1, int w1, int h1, float x2, float y2, int w2, 
 void Ball::render()
 {
 	spriteSheet.render((int) x, (int) y, &sprite);
+}
+
+void Ball::reset()
+{
+	x = 400;
+	y = 300;
+	velX = ballSpeed / ((float)sqrt(2));
+	velY = ballSpeed / ((float)sqrt(2));
 }
