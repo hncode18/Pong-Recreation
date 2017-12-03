@@ -8,7 +8,8 @@ class Element
 		Element();
 		~Element();
 
-		bool checkCollision(float x1, float y1, int w1, int h1);
+		bool checkOverlap(float x0, float y0, float x1, float y1, int w1, int h1);
+		int collisionDetection(float dX, float dY, float x1, float y1, int w1, int h1);
 		virtual void pollEvents(SDL_Event &e);
 		virtual void move();
 		virtual void render();
